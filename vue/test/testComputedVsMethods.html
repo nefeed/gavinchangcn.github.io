@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello Vue.js</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="example">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed Reversed message: " {{ computedMessage }} "</p>
+        <p>Methods Reversed message: " {{ methodsMessage }} "</p>
+        <input v-model="message" ></input>
+        <button v-on:click="reverseMessage">click to reverse</button>
+    </div>
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#example',
+        data: {
+            message: 'Hello',
+            computedMessage: '',
+            methodsMessage: ''
+        },
+        computed: {
+            computedReversedMessage: function() {
+                return this.message.split('').reverse().join('') +'{ time:'+ Date.now() + ' }'
+            }
+        },
+        methods: {
+            methodsReversedMessage: function() {
+                return this.message.split('').reverse().join('') +'{ time:'+ Date.now() + ' }'
+            },
+            reverseMessage: function() {
+                this.computedMessage = this.computedReversedMessage
+                this.methodsMessage = this.methodsReversedMessage()
+            }
+        }
+    })
+</script>
+
+</html>
